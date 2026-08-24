@@ -86,17 +86,26 @@ can reach us at either address above.</p>
 match the data our systems store.</p>
 <h3 id="21-account-and-profile-data">2.1 Account and profile data</h3>
 <ul>
-<li><strong>Display name</strong> — shown to other members of your groups.</li>
+<li><strong>First name and surname</strong> <em>(required)</em> — both are needed to use the App, and
+  together they form the display name shown to other members of your groups. The
+  surname is required because settling up ends with someone entering your name in
+  their own banking app and checking it against the account holder before sending
+  money; a first name alone is not enough to verify a recipient.</li>
 <li><strong>Email address</strong> — used to create and secure your account (email sign-in or
   Google sign-in).</li>
 <li><strong>Phone number</strong> <em>(optional)</em> — only if you choose to provide it.</li>
 <li><strong>Avatar image</strong> <em>(optional)</em> — if you set a profile picture, including one
   provided by Google sign-in.</li>
-<li><strong>Bank account number (IBAN)</strong> <em>(optional)</em> — a Georgian IBAN you may add so
-  that other members of your groups can send you money from their own bank app.
-  Providing an IBAN is entirely voluntary; you can use the App without one. From
-  the IBAN we automatically derive only your bank code (for example, TBC or Bank
-  of Georgia) to open the correct bank app at settlement time.</li>
+<li><strong>Bank account numbers (IBANs)</strong> <em>(optional)</em> — one or more Georgian IBANs you
+  may add so that other members of your groups can send you money from their own
+  bank app. You may add several accounts and mark one as your default; members
+  paying you choose which of them to send to, so that the transfer can stay
+  within their own bank. You may add an optional short label to an account (for
+  example, "salary") to tell two accounts apart. Providing an IBAN is entirely
+  voluntary; you can use the App without one, and you can remove one at any time.
+  From each IBAN we automatically derive only your bank code (for example, TBC,
+  Bank of Georgia, Credo or Terabank) to show the bank's name and open the
+  correct bank app at settlement time.</li>
 <li><strong>Language preference (locale)</strong> — Georgian or English.</li>
 <li><strong>Terms acceptance record</strong> — the date and version of the Terms &amp; Conditions
   you accepted.</li>
@@ -136,7 +145,8 @@ tracking, and we do <strong>not</strong> run advertising trackers in the App.</p
 <ul>
 <li>to create and secure your account and sign you in;</li>
 <li>to let you create groups, record shared expenses, and calculate balances;</li>
-<li>to show your name, avatar, and — to members of your shared groups — your IBAN,
+<li>to show your name, avatar, and — to members of your shared groups — your
+  IBAN(s),
   so the group can settle up;</li>
 <li>to prepare transfer details (recipient IBAN and amount) and open your banking
   app when you choose to settle;</li>
@@ -173,10 +183,11 @@ for such processing.</p>
 <li><strong>You</strong> can always see and manage your own profile and the groups you belong to.</li>
 <li><strong>Members of a group you share</strong> can see your display name and avatar, the
   shared expenses, splits, settlements, and activity in that group, and — if you
-  provided one — <strong>your IBAN</strong>, because they need it to send you money.</li>
-<li><strong>Your IBAN is visible only to people who share at least one group with you.</strong>
+  provided any — <strong>your IBAN(s)</strong>, because they need them to send you money.</li>
+<li><strong>Your IBANs are visible only to people who share at least one group with you.</strong>
   This restriction is enforced at the database level by Row-Level Security (RLS);
-  strangers and users who do not share a group with you cannot read your IBAN.</li>
+  strangers and users who do not share a group with you cannot read your IBANs,
+  and nobody but you can add, change or remove one.</li>
 <li><strong>Service providers</strong> that host our infrastructure or process data on our behalf
   (see Section 9) access data only to provide their service to us.</li>
 </ul>
@@ -214,7 +225,7 @@ members see only what you are entitled to see.</p>
 <li><strong>Delete</strong> your account and associated personal data;</li>
 <li><strong>Export / port</strong> a copy of your data in a common format;</li>
 <li><strong>Object to or restrict</strong> certain processing;</li>
-<li><strong>Withdraw consent</strong> you previously gave (for example, by removing your IBAN or
+<li><strong>Withdraw consent</strong> you previously gave (for example, by removing an IBAN or
   declining to use receipt scanning).</li>
 </ul>
 <p>To exercise any of these rights, contact us at splitapp.support@gmail.com. We will
