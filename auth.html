@@ -59,7 +59,7 @@
 
 <h1>Opening split…</h1>
 <p id="msg">Redirecting you back to the app.</p>
-<p><a class="btn" id="manual" href="#">Open split</a></p>
+<p id="manual-wrap"><a class="btn" id="manual" href="#">Open split</a></p>
 <p style="color:var(--muted);font-size:14px">
   Nothing happening? You may not have split installed on this device, or your
   browser may be blocking the redirect. Open this link on the phone where split
@@ -75,18 +75,32 @@
 </style>
 <script>
   // Preserve both: Supabase uses ?code= for PKCE and #access_token= for implicit.
-  var target = "ge.splitapp.split_app://login-callback"
+  var target = "ge.splitapp://login-callback"
              + window.location.search + window.location.hash;
-  document.getElementById("manual").setAttribute("href", target);
 
-  // Only auto-redirect on Android, where the scheme can actually resolve.
-  // A browser that does not know the scheme resolves it as a *relative* path
-  // and navigates to a 404 on this origin — replacing the fallback below with
-  // a server error page, which is the opposite of helpful. Everywhere else the
-  // button stays, and the user opens the link on their phone.
-  if (/Android/i.test(navigator.userAgent)) {
+  // Never put a link to the app scheme in front of a browser that cannot act
+  // on it. Two things have to hold, and both are checked rather than assumed:
+  //
+  //  * the URL must actually parse as absolute — an invalid scheme (e.g. one
+  //    containing an underscore) makes browsers resolve it as a *relative
+  //    path*, so the click lands on a 404 of this origin and reads as sign-in
+  //    having broken, and
+  //  * the platform must be Android, the only one where the scheme resolves.
+  //
+  // Otherwise the button is removed and the page keeps its own explanation.
+  var absolute = false;
+  try {
+    absolute = new URL(target).protocol === "ge.splitapp:";
+  } catch (e) {
+    absolute = false;
+  }
+
+  if (absolute && /Android/i.test(navigator.userAgent)) {
+    document.getElementById("manual").setAttribute("href", target);
     setTimeout(function () { window.location.href = target; }, 120);
   } else {
+    var wrap = document.getElementById("manual-wrap");
+    wrap.parentNode.removeChild(wrap);
     document.getElementById("msg").textContent =
       "Open this link on the phone where split is installed.";
   }
